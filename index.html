@@ -36,13 +36,13 @@
                 <b>npm i express bcryptjs</b> <br>
                 <b>npm i express passport</b> <br>
                 <b>npm i express passport-local</b> <br>
-                <b>npm i express timeago.js</b> <br>
+                <b>npm i express timeago.js</b> <br> <br>
                 Para las validaciones: <br>
                 <b>npm i express connect-flash</b> <br>
-                <b>npm i express express-validator</b> <br>
+                <b>npm i express express-validator</b> <br> <br>
 
                 Para la parte de Desarrollo: <br>
-                <b>npm i nodemon -D</b> <br>
+                <b>npm i nodemon -D</b> <br> <br>
             </p>
 
             <p>
@@ -136,10 +136,10 @@
                 <br>
                 Debera correr en Localhost:4000 dando un error (un error positivo, porque vemos que Nodemon esta corriendo pero el error es porque no hemos linqueado nada aun en los archivos).
                 <br> <br>
-                Nos vamos a la Carpeta <b>routers</b>:
+                Nos vamos a la Carpeta <b>routers</b>, creamos el archivo <b>index.js</b> y dentro:
             </p>
             <div class="border">
-                <p><b>index.js</b></p>
+                <p><b>src > routers > index.js</b></p>
                 <pre>
                     <code>
     <span class="new-c">//Acá vamos a guardar todas las ruta principales de nuestro proyecto</span>
@@ -159,13 +159,13 @@
                 Nos movemos a la carpeta <b>src</b>:
             </p>
             <div class="border">
-                <p><b>index.js</b></p>
+                <p><b>src > index.js</b></p>
                 <pre>
                     <code>
     const express = require('express');
     const morgan = require('morgan');
     <span class="new-c">const { engine } = require('express-handlebars');</span>
-    <span class="new-c">const path = requiere('path');</span>
+    <span class="new-c">const path = require('path');</span>
 
     //inicializaciones: funciones de inicialización de clases
     const app = express();
@@ -194,10 +194,137 @@
                     </code>
                 </pre>
             </div>
-            
 
-            
+            <p>
+                En la carpeta <b>lib</b> creamos el archivo <b>handlebars.js</b>
+                <br> <br>
+                Volvemos a la carpeta <b>src</b>:
+            </p>
+            <div class="border">
+                <p><b>src > index.html</b></p>
+                <pre>
+                    <code>
+    const express = require('express');
+    const morgan = require('morgan');
+    const { engine } = require('express-handlebars');
+    const path = require('path');
+    <span class="new-c">helpers: require('./lib/handlebars.js');</span>
 
+    //inicializaciones: funciones de inicialización de clases
+    const app = express();
+    //configuraciones
+    app.set('port', process.env.Port || 4000);
+    app.path('views', path.join(__dirname, 'views'));
+    app.engine('.hbs', engine({
+    defaultlayout: "main",
+    layoutsDir: path.join(app.get('views'), 'layouts'),
+    partialsDir: path.join(app.get('views'), 'partials'),
+    extname: '.hbs'
+    }))
+    //Middelwares: funciones que se ejecutan cada vez que un cliente solicita una petición al servidor
+    app.use(morgan('dev'));
+    //Variables globales
+    <span class="new-c">app.use((req, res, next)=>{</span>
+        <span class="new-c">next();</span>
+    <span class="new-c">})</span>        
+    //Routes
+    app.use(require('./routers/index.js'));
+
+    //Public: Código al cual va acceder el navegador
+
+    //satarting the server
+    app.listen(app.get('port'), () => {
+    console.log('Serve on port', app.get('port'));
+    })
+                    </code>
+                </pre>
+            </div>
+
+            <p>
+                En la carpeta <b>routers</b> creamos los archivos <b>autentication.js</b> y <b>links.js</b>.
+            </p>
+
+            <div class="border">
+                <p><b>src > index.html</b></p>
+                <pre>
+                    <code>
+    const express = require('express');
+    const morgan = require('morgan');
+    const { engine } = require('express-handlebars');
+    const path = require('path');
+    helpers: require('./lib/handlebars.js');
+
+    //inicializaciones: funciones de inicialización de clases
+    const app = express();
+    //configuraciones
+    app.set('port', process.env.Port || 4000);
+    app.path('views', path.join(__dirname, 'views'));
+    app.engine('.hbs', engine({
+    defaultlayout: "main",
+    layoutsDir: path.join(app.get('views'), 'layouts'),
+    partialsDir: path.join(app.get('views'), 'partials'),
+    extname: '.hbs'
+    }))
+    //Middelwares: funciones que se ejecutan cada vez que un cliente solicita una petición al servidor
+    app.use(morgan('dev'));
+    //Variables globales
+    app.use((req, res, next)=>{
+        next();
+    })        
+    //Routes
+    app.use(require('./routers/index.js'));
+    <span class="new-c">app.use(require('./routers/autentication'));</span>
+    <span class="new-c">app.use('/links', require('./routers/links'));</span>
+
+    //Public: Código al cual va acceder el navegador
+
+    //satarting the server
+    app.listen(app.get('port'), () => {
+    console.log('Serve on port', app.get('port'));
+    })
+                    </code>
+                </pre>
+            </div>
+
+            <p>Vamos a la carpeta <b>routers</b> y tanto para <b>autentication.js</b> como para <b>links.js</b> usaremos este mismo codigo:</p>
+            <div class="border">
+                <p><b>autentication.js</b> y <b>links.js</b>:</p>
+                <pre>
+                    <code>
+    <span class="new-c">const express = require('express');</span>
+    <span class="new-c">const router = express.Router();</span>
+
+    <span class="new-c">module.exports = router;</span> 
+                    </code>
+                </pre>
+            </div>
+
+
+            <p>Creamos la carpeta <b>database</b> en la carpeta del proyecto (fuera de <b>src</b>) y dentro creamos el archivo <b>db.sql</b>:</p>
+            <div class="border">
+                <p>db.sql</p>
+                <pre>
+                    <code>
+    <span class="new-c">CREATE DATABASE database_link;</span>
+
+    <span class="new-c">USE database_link;</span>
+
+    <span class="new-c">CREATE TABLE users (</span>
+        <span class="new-c">id INT(10) PRIMARY KEY NOT NULL,</span>
+        <span class="new-c">nom_usuario VARCHAR(100) NOT NULL,</span>
+        <span class="new-c">pass VARCHAR(20) NOT NULL</span>
+    <span class="new-c">)</span>
+
+    <span class="new-c">CREATE TABLE links (</span>
+        <span class="new-c">id int(10) PRIMARY KEY NOT NULL,</span>
+        <span class="new-c">link VARCHAR(200) NOT NULL,</span>
+        <span class="new-c">observaciones VARCHAR(500)</span>
+    <span class="new-c">)</span>
+                    </code>
+                </pre>
+            </div>
+
+            <p>Y con esto concluimos el Encuentro 6.</p>
 
         </section>
     </div>
