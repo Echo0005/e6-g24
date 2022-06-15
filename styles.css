@@ -7,3 +7,7 @@
     background-color:rgb(255, 107, 107);
     color:darkred;
 }
+
+pre {
+    padding: 0px 0px 0px 50px;
+}

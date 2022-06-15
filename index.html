@@ -23,6 +23,8 @@
 
             <p>En este caso evitaremos usar el comando <b>ng new nombre-del-proyecto</b> dado que instalaremos a mano lo que necesitemos para ir viendo todo el proceso de creacion del proyecto.</p>
 
+            <p><b>Aviso: Todos los problemas que yo tuve a la hora de llevar a cabo este proyecto, fueron debido a errores de escritura. Esten atentos.</b></p>
+
             <p>Estando en Visual Studio Code, usaremos los siguientes comandos para crear el archivo <b>package.json</b> que necesitamos e instalaremos el framework Express junto a las librerias que necesitemos del mismo:</p>
 
             <p>
@@ -57,7 +59,7 @@
 
                 <br> <br>
 
-                Dentro de la carpeta <b>src</b> creamos los siguientes archivos: <b>index.js</b>, <b>database.js</b> (que usaremos de base de datos) y <b>keys.js</b> (que usaremos para los accesos a la base de datos).
+                Dentro de la carpeta <b>src</b> creamos los siguientes archivos: <b>index.js</b>, <b>database.js</b> (que usaremos para la base de datos) y <b>keys.js</b> (que usaremos para los accesos a la base de datos).
 
                 <br> <br>
 
@@ -68,25 +70,25 @@
                 <p>SRC > Index.JS:</p>
             <pre>
                 <code>
-    <span class="new-c">const express = require('express');</span>
-    <span class="new-c">const morgan = require('morgan');</span>
+<span class="new-c">const express = require('express');</span>
+<span class="new-c">const morgan = require('morgan');</span>
 
-    <span class="new-c">//inicializaciones: funciones de inicialización de clases</span>
-    <span class="new-c">const app = express();</span>
-    <span class="new-c">//configuraciones</span>
-    <span class="new-c">app.set('port', process.env.Port || 4000);</span>
-    <span class="new-c">//Middelwares: funciones que se ejecutan cada vez que un cliente solicita una petición al servidor</span>
-    <span class="new-c">app.use(morgan('dev'));</span>
-    <span class="new-c">//Variables globales</span>
+<span class="new-c">//inicializaciones: funciones de inicialización de clases</span>
+<span class="new-c">const app = express();</span>
+<span class="new-c">//configuraciones</span>
+<span class="new-c">app.set('port', process.env.Port || 4000);</span>
+<span class="new-c">//Middelwares: funciones que se ejecutan cada vez que un cliente solicita una petición al servidor</span>
+<span class="new-c">app.use(morgan('dev'));</span>
+<span class="new-c">//Variables globales</span>
 
-    <span class="new-c">//Routes</span>
+<span class="new-c">//Routes</span>
 
-    <span class="new-c">//Public: Código al cual va acceder el navegador</span>
+<span class="new-c">//Public: Código al cual va acceder el navegador</span>
 
-    <span class="new-c">//satarting the server</span>
-    <span class="new-c">app.listen(app.get('port'), () => {</span>
+<span class="new-c">//satarting the server</span>
+<span class="new-c">app.listen(app.get('port'), () => {</span>
     <span class="new-c">console.log('Serve on port', app.get('port'));</span>
-    <span class="new-c">})</span>
+<span class="new-c">})</span>
                 </code>
             </pre>
             </div>
@@ -96,37 +98,36 @@
                 <p><b>package.json:</b></p>
                 <pre>
                     <code>
-    {
-        "name": "angular-e6-g24",
-        "version": "1.0.0",
-        "description": "",
-        "main": "index.js",
-        "scripts": {
-          <span class="delete-c">"test": "echo \"Error: no test specified\" && exit 1"</span>
-          <span class="new-c">"dev": "nodemon src/index.js"</span>          
-          
-        },
-        "keywords": [],
-        "author": "",
-        "license": "ISC",
-        "dependencies": {
-          "bcryptjs": "^2.4.3",
-          "connect-flash": "^0.1.1",
-          "express": "^4.18.1",
-          "express-handlebars": "^6.0.6",
-          "express-mysql-session": "^2.1.8",
-          "express-session": "^1.17.3",
-          "express-validator": "^6.14.1",
-          "morgan": "^1.10.0",
-          "mysql": "^2.18.1",
-          "passport": "^0.6.0",
-          "passport-local": "^1.0.0",
-          "timeago.js": "^4.0.2"
-        },
-        "devDependencies": {
-          "nodemon": "^2.0.16"
-        }
-      }
+{
+    "name": "angular-e6-g24",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        <span class="delete-c">"test": "echo \"Error: no test specified\" && exit 1"</span>
+        <span class="new-c">"dev": "nodemon src/index.js"</span>
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "bcryptjs": "^2.4.3",
+        "connect-flash": "^0.1.1",
+        "express": "^4.18.1",
+        "express-handlebars": "^6.0.6",
+        "express-mysql-session": "^2.1.8",
+        "express-session": "^1.17.3",
+        "express-validator": "^6.14.1",
+        "morgan": "^1.10.0",
+        "mysql": "^2.18.1",
+        "passport": "^0.6.0",
+        "passport-local": "^1.0.0",
+        "timeago.js": "^4.0.2"
+    },
+    "devDependencies": {
+    "nodemon": "^2.0.16"
+    }
+}
                     </code>
                 </pre>
             </div>
@@ -142,15 +143,15 @@
                 <p><b>src > routers > index.js</b></p>
                 <pre>
                     <code>
-    <span class="new-c">//Acá vamos a guardar todas las ruta principales de nuestro proyecto</span>
-    <span class="new-c">const express = require('express');</span>
-    <span class="new-c">const router = express.Router();</span>
+<span class="new-c">//Acá vamos a guardar todas las ruta principales de nuestro proyecto</span>
+<span class="new-c">const express = require('express');</span>
+<span class="new-c">const router = express.Router();</span>
 
-    <span class="new-c">router.get('/', (req, res) =>{</span>
-        <span class="new-c">res.send("Hola Mundo");</span>
-    <span class="new-c">});</span>
+<span class="new-c">router.get('/', (req, res) =>{</span>
+    <span class="new-c">res.send("Hola Mundo");</span>
+<span class="new-c">});</span>
 
-    <span class="new-c">module.exports = router;</span>
+<span class="new-c">module.exports = router;</span>
                     </code>
                 </pre>
             </div>
@@ -162,35 +163,35 @@
                 <p><b>src > index.js</b></p>
                 <pre>
                     <code>
-    const express = require('express');
-    const morgan = require('morgan');
-    <span class="new-c">const { engine } = require('express-handlebars');</span>
-    <span class="new-c">const path = require('path');</span>
+const express = require('express');
+const morgan = require('morgan');
+<span class="new-c">const { engine } = require('express-handlebars');</span>
+<span class="new-c">const path = require('path');</span>
 
-    //inicializaciones: funciones de inicialización de clases
-    const app = express();
-    //configuraciones
-    app.set('port', process.env.Port || 4000);
-    <span class="new-c">app.path('views', path.join(__dirname, 'views'));</span>
-    <span class="new-c">app.engine('.hbs', engine({</span>
+//inicializaciones: funciones de inicialización de clases
+const app = express();
+//configuraciones
+app.set('port', process.env.Port || 4000);
+<span class="new-c">app.path('views', path.join(__dirname, 'views'));</span>
+<span class="new-c">app.engine('.hbs', engine({</span>
     <span class="new-c">defaultlayout: "main",</span>
     <span class="new-c">layoutsDir: path.join(app.get('views'), 'layouts'),</span>
     <span class="new-c">partialsDir: path.join(app.get('views'), 'partials'),</span>
     <span class="new-c">extname: '.hbs'</span>
-    <span class="new-c">}))</span>
-    //Middelwares: funciones que se ejecutan cada vez que un cliente solicita una petición al servidor
-    app.use(morgan('dev'));
-    //Variables globales
+<span class="new-c">}))</span>
+//Middelwares: funciones que se ejecutan cada vez que un cliente solicita una petición al servidor
+app.use(morgan('dev'));
+//Variables globales
 
-    //Routes
-    <span class="new-c">app.use(require('./routers/index.js'));</span>
+//Routes
+<span class="new-c">app.use(require('./routers/index.js'));</span>
 
-    //Public: Código al cual va acceder el navegador
+//Public: Código al cual va acceder el navegador
 
-    //satarting the server
-    app.listen(app.get('port'), () => {
-    console.log('Serve on port', app.get('port'));
-    })
+//satarting the server
+app.listen(app.get('port'), () => {
+console.log('Serve on port', app.get('port'));
+})
                     </code>
                 </pre>
             </div>
@@ -204,38 +205,38 @@
                 <p><b>src > index.html</b></p>
                 <pre>
                     <code>
-    const express = require('express');
-    const morgan = require('morgan');
-    const { engine } = require('express-handlebars');
-    const path = require('path');
-    <span class="new-c">helpers: require('./lib/handlebars.js');</span>
+const express = require('express');
+const morgan = require('morgan');
+const { engine } = require('express-handlebars');
+const path = require('path');
+<span class="new-c">helpers: require('./lib/handlebars.js');</span>
 
-    //inicializaciones: funciones de inicialización de clases
-    const app = express();
-    //configuraciones
-    app.set('port', process.env.Port || 4000);
-    app.path('views', path.join(__dirname, 'views'));
-    app.engine('.hbs', engine({
-    defaultlayout: "main",
-    layoutsDir: path.join(app.get('views'), 'layouts'),
-    partialsDir: path.join(app.get('views'), 'partials'),
-    extname: '.hbs'
-    }))
-    //Middelwares: funciones que se ejecutan cada vez que un cliente solicita una petición al servidor
-    app.use(morgan('dev'));
-    //Variables globales
-    <span class="new-c">app.use((req, res, next)=>{</span>
-        <span class="new-c">next();</span>
-    <span class="new-c">})</span>        
-    //Routes
-    app.use(require('./routers/index.js'));
+//inicializaciones: funciones de inicialización de clases
+const app = express();
+//configuraciones
+app.set('port', process.env.Port || 4000);
+app.path('views', path.join(__dirname, 'views'));
+app.engine('.hbs', engine({
+defaultlayout: "main",
+layoutsDir: path.join(app.get('views'), 'layouts'),
+partialsDir: path.join(app.get('views'), 'partials'),
+extname: '.hbs'
+}))
+//Middelwares: funciones que se ejecutan cada vez que un cliente solicita una petición al servidor
+app.use(morgan('dev'));
+//Variables globales
+<span class="new-c">app.use((req, res, next)=>{</span>
+    <span class="new-c">next();</span>
+<span class="new-c">})</span>
+//Routes
+app.use(require('./routers/index.js'));
 
-    //Public: Código al cual va acceder el navegador
+//Public: Código al cual va acceder el navegador
 
-    //satarting the server
-    app.listen(app.get('port'), () => {
-    console.log('Serve on port', app.get('port'));
-    })
+//satarting the server
+app.listen(app.get('port'), () => {
+console.log('Serve on port', app.get('port'));
+})
                     </code>
                 </pre>
             </div>
@@ -248,78 +249,82 @@
                 <p><b>src > index.html</b></p>
                 <pre>
                     <code>
-    const express = require('express');
-    const morgan = require('morgan');
-    const { engine } = require('express-handlebars');
-    const path = require('path');
-    helpers: require('./lib/handlebars.js');
+const express = require('express');
+const morgan = require('morgan');
+const { engine } = require('express-handlebars');
+const path = require('path');
+helpers: require('./lib/handlebars.js');
 
-    //inicializaciones: funciones de inicialización de clases
-    const app = express();
-    //configuraciones
-    app.set('port', process.env.Port || 4000);
-    app.path('views', path.join(__dirname, 'views'));
-    app.engine('.hbs', engine({
-    defaultlayout: "main",
-    layoutsDir: path.join(app.get('views'), 'layouts'),
-    partialsDir: path.join(app.get('views'), 'partials'),
-    extname: '.hbs'
-    }))
-    //Middelwares: funciones que se ejecutan cada vez que un cliente solicita una petición al servidor
-    app.use(morgan('dev'));
-    //Variables globales
-    app.use((req, res, next)=>{
-        next();
-    })        
-    //Routes
-    app.use(require('./routers/index.js'));
-    <span class="new-c">app.use(require('./routers/autentication'));</span>
-    <span class="new-c">app.use('/links', require('./routers/links'));</span>
+//inicializaciones: funciones de inicialización de clases
+const app = express();
+//configuraciones
+app.set('port', process.env.Port || 4000);
+app.path('views', path.join(__dirname, 'views'));
+app.engine('.hbs', engine({
+defaultlayout: "main",
+layoutsDir: path.join(app.get('views'), 'layouts'),
+partialsDir: path.join(app.get('views'), 'partials'),
+extname: '.hbs'
+}))
+//Middelwares: funciones que se ejecutan cada vez que un cliente solicita una petición al servidor
+app.use(morgan('dev'));
+//Variables globales
+app.use((req, res, next)=>{
+    next();
+})        
+//Routes
+app.use(require('./routers/index.js'));
+<span class="new-c">app.use(require('./routers/autentication'));</span>
+<span class="new-c">app.use('/links', require('./routers/links'));</span>
 
-    //Public: Código al cual va acceder el navegador
+//Public: Código al cual va acceder el navegador
 
-    //satarting the server
-    app.listen(app.get('port'), () => {
-    console.log('Serve on port', app.get('port'));
-    })
+//satarting the server
+app.listen(app.get('port'), () => {
+console.log('Serve on port', app.get('port'));
+})
                     </code>
                 </pre>
             </div>
+
+            <p>Tras esto la Consola comenzara a darnos error, porque Autenticacion y Links de Router, estan vacios.</p>
 
             <p>Vamos a la carpeta <b>routers</b> y tanto para <b>autentication.js</b> como para <b>links.js</b> usaremos este mismo codigo:</p>
             <div class="border">
                 <p><b>autentication.js</b> y <b>links.js</b>:</p>
                 <pre>
                     <code>
-    <span class="new-c">const express = require('express');</span>
-    <span class="new-c">const router = express.Router();</span>
+<span class="new-c">const express = require('express');</span>
+<span class="new-c">const router = express.Router();</span>
 
-    <span class="new-c">module.exports = router;</span> 
+<span class="new-c">module.exports = router;</span>
                     </code>
                 </pre>
             </div>
 
+            <p>Ya con esto en el navegador podemos ver nuestro "Hola Mundo" y desaparece el nombre "Error" en el nombre de la pestaña de la pagina, indicando ahora "localhost:4000".</p>
+
 
             <p>Creamos la carpeta <b>database</b> en la carpeta del proyecto (fuera de <b>src</b>) y dentro creamos el archivo <b>db.sql</b>:</p>
             <div class="border">
-                <p>db.sql</p>
+                <p><b>db.sql</b></p>
                 <pre>
                     <code>
-    <span class="new-c">CREATE DATABASE database_link;</span>
+<span class="new-c">CREATE DATABASE database_link;</span>
 
-    <span class="new-c">USE database_link;</span>
+<span class="new-c">USE database_link;</span>
 
-    <span class="new-c">CREATE TABLE users (</span>
-        <span class="new-c">id INT(10) PRIMARY KEY NOT NULL,</span>
-        <span class="new-c">nom_usuario VARCHAR(100) NOT NULL,</span>
-        <span class="new-c">pass VARCHAR(20) NOT NULL</span>
-    <span class="new-c">)</span>
+<span class="new-c">CREATE TABLE users (</span>
+    <span class="new-c">id INT(10) PRIMARY KEY NOT NULL,</span>
+    <span class="new-c">nom_usuario VARCHAR(100) NOT NULL,</span>
+    <span class="new-c">pass VARCHAR(20) NOT NULL</span>
+<span class="new-c">)</span>
 
-    <span class="new-c">CREATE TABLE links (</span>
-        <span class="new-c">id int(10) PRIMARY KEY NOT NULL,</span>
-        <span class="new-c">link VARCHAR(200) NOT NULL,</span>
-        <span class="new-c">observaciones VARCHAR(500)</span>
-    <span class="new-c">)</span>
+<span class="new-c">CREATE TABLE links (</span>
+    <span class="new-c">id int(10) PRIMARY KEY NOT NULL,</span>
+    <span class="new-c">link VARCHAR(200) NOT NULL,</span>
+    <span class="new-c">observaciones VARCHAR(500)</span>
+<span class="new-c">)</span>
                     </code>
                 </pre>
             </div>
