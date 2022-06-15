@@ -69,7 +69,6 @@
             <pre>
                 <code>
     <span class="new-c">const express = require('express');</span>
-    <span class="new-c">const express = require('express');</span>
     <span class="new-c">const morgan = require('morgan');</span>
 
     <span class="new-c">//inicializaciones: funciones de inicialización de clases</span>
@@ -103,8 +102,9 @@
         "description": "",
         "main": "index.js",
         "scripts": {
-          <span class="delete-c">"test": "echo \"Error: no test specified\" && exit 1"</span>          
-          "dev": "nodemon src/index.js"
+          <span class="delete-c">"test": "echo \"Error: no test specified\" && exit 1"</span>
+          <span class="new-c">"dev": "nodemon src/index.js"</span>          
+          
         },
         "keywords": [],
         "author": "",
@@ -127,6 +127,70 @@
           "nodemon": "^2.0.16"
         }
       }
+                    </code>
+                </pre>
+            </div>
+
+            <p>
+                En Consola iniciamos Nodemon: <b>npm run dev</b>
+                <br>
+                Debera correr en Localhost:4000 dando un error (un error positivo, porque vemos que Nodemon esta corriendo pero el error es porque no hemos linqueado nada aun en los archivos).
+                <br> <br>
+                Nos vamos a la Carpeta <b>routers</b>:
+            </p>
+            <div class="border">
+                <p><b>index.js</b></p>
+                <pre>
+                    <code>
+    <span class="new-c">//Acá vamos a guardar todas las ruta principales de nuestro proyecto</span>
+    <span class="new-c">const express = require('express');</span>
+    <span class="new-c">const router = express.Router();</span>
+
+    <span class="new-c">router.get('/', (req, res) =>{</span>
+        <span class="new-c">res.send("Hola Mundo");</span>
+    <span class="new-c">});</span>
+
+    <span class="new-c">module.exports = router;</span>
+                    </code>
+                </pre>
+            </div>
+
+            <p>
+                Nos movemos a la carpeta <b>src</b>:
+            </p>
+            <div class="border">
+                <p><b>index.js</b></p>
+                <pre>
+                    <code>
+    const express = require('express');
+    const morgan = require('morgan');
+    <span class="new-c">const { engine } = require('express-handlebars');</span>
+    <span class="new-c">const path = requiere('path');</span>
+
+    //inicializaciones: funciones de inicialización de clases
+    const app = express();
+    //configuraciones
+    app.set('port', process.env.Port || 4000);
+    <span class="new-c">app.path('views', path.join(__dirname, 'views'));</span>
+    <span class="new-c">app.engine('.hbs', engine({</span>
+    <span class="new-c">defaultlayout: "main",</span>
+    <span class="new-c">layoutsDir: path.join(app.get('views'), 'layouts'),</span>
+    <span class="new-c">partialsDir: path.join(app.get('views'), 'partials'),</span>
+    <span class="new-c">extname: '.hbs'</span>
+    <span class="new-c">}))</span>
+    //Middelwares: funciones que se ejecutan cada vez que un cliente solicita una petición al servidor
+    app.use(morgan('dev'));
+    //Variables globales
+
+    //Routes
+    <span class="new-c">app.use(require('./routers/index.js'));</span>
+
+    //Public: Código al cual va acceder el navegador
+
+    //satarting the server
+    app.listen(app.get('port'), () => {
+    console.log('Serve on port', app.get('port'));
+    })
                     </code>
                 </pre>
             </div>
