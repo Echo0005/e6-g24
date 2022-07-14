@@ -14,29 +14,39 @@
     <div class="container">
         <header>
             <h1>Encuentro 6, Grupo 24.</h1>
-            <h3>Preparacion de nuestro Proyecto para las futuras clases.</h3>
+            <h3>Preparación de nuestro Proyecto para las futuras clases.</h3>
         </header>
 
         <section>
 
+            <div class="border card">                
+                <p>
+                    Crearemos un proyecto en Angular desde cero, pero instalando manualmente todo lo que vamos a necesitar para el desarrollo de esta Base para las siguientes clases.
+                    <br><br>
+                    En este caso evitaremos usar el comando <b>ng new nombre-del-proyecto</b> dado que instalaremos a mano lo que necesitemos para ir viendo todo el proceso de creación del proyecto.
+                    <br><br>
+                    <b>Aviso: Todos los problemas que yo tuve a la hora de llevar a cabo este proyecto, fueron debido a errores de escritura. Esté atentos. Algunos errores que aparecen en Consola se solucionan continuando la guía (dado que su causa es falta de código)</b>
+                </p>
+            </div>
+
             <div class="border card">
-                
-                <p>Crearemos un proyecto en Angular desde cero pero instalando manualmente todo lo que vamos a necesitar para el desarrollo de esta Base para las siguientes clases.</p>
-
-                <p>En este caso evitaremos usar el comando <b>ng new nombre-del-proyecto</b> dado que instalaremos a mano lo que necesitemos para ir viendo todo el proceso de creacion del proyecto.</p>
-
-                <p><b>Aviso: Todos los problemas que yo tuve a la hora de llevar a cabo este proyecto, fueron debido a errores de escritura. Esten atentos.</b></p>
+                <h4>Aclaración</h4>
+                <p>
+                    Esta guía expresará código de la siguiente manera: <br> <br>
+                    <span class="new-c">Código a Agregar.</span> <br>
+                    <span class="delete-c">Código a Borrar.</span> <br>
+                    Y sin resaltado, será Código a Mantener tal cual se encuentra.
+                </p>
             </div>
 
             <div class="border card">
                 <p>
-                    Estando en Visual Studio Code, creamos una carpeta (como quieran) para nuestro proyecto (que sera nuestra carpeta raíz) y usaremos los siguientes comandos para crear el archivo <b>package.json</b> que necesitamos e instalaremos el framework Express, junto a las librerias que necesitemos del mismo:
+                    Creamos una carpeta (como y donde quieran) para nuestro proyecto (que será nuestra carpeta raíz), entramos a Visual Studio Code y usaremos los siguientes comandos para crear el archivo <b>package.json</b> que necesitamos e instalaremos el framework Express, junto a las librerías que necesitemos del mismo:
+                    <br><br>
+                    (Si están en Windows, asegúrense de que la Consola esté trabajando con CMD).
+                    <br>
                 </p>
 
-                <p>
-                    (Si estan en Windows, asegurense de que la Consola este trabajando con CMD). <br>
-                    
-                </p>
 
                 <pre>
 <b>npm init --yes</b> : Para crear solo el archivo <b>package.json</b>
@@ -57,32 +67,31 @@ Para las validaciones:
 Para la parte de Desarrollo:
 <b>npm i nodemon -D</b>
                 </pre>
-
             </div>
 
             <div class="card">
                 <p>
-                    Creamos la carpeta <b>src</b> mas 4 carpetas dentro: <b>lib</b>, <b>public</b>, <b>routers</b> y <b>views</b>.
-                    Podemos usar la consola para esto de la siguiente forma:
-                    <br> <br>
-
-                    
+                    Creamos la carpeta <b>src</b> más 4 carpetas dentro: <b>lib</b>, <b>public</b>, <b>routers</b> y <b>views</b>.
+                    Podemos usar la consola para esto de la siguiente forma:                  
                 </p>
-                <b>
-                    <pre>
-                        <code>
-mkdir src
-cd src
-mkdir lib public routers views
-                        </code>
-                    </pre>
-                </b>
+                <div>
+                    <p>
+                        <b>
+                            <pre>
+                                <code>
+    mkdir src
+    cd src
+    mkdir lib public routers views
+                                </code>
+                            </pre>
+                        </b>
+                    </p> 
+                </div>
+                
                 <p>
-                    Dentro de la carpeta <b>src</b> creamos los siguientes archivos: <b>index.js</b>, <b>database.js</b> (que usaremos para la base de datos) y <b>keys.js</b> (que usaremos para los accesos a la base de datos).
-    
-                    <br> <br>
-    
-                    Importamos los modulos utilizando una constante en el <b>index.js</b>
+                    Dentro de la carpeta <b>src</b> creamos los siguientes archivos: <b>index.js</b>, <b>database.js</b> (que usaremos para la base de datos) y <b>keys.js</b> (que usaremos para los accesos a la base de datos).    
+                    <br> <br>    
+                    Importamos los módulos utilizando una constante en el <b>index.js</b>
                 </p>
 
                 <div class="border">
@@ -155,7 +164,7 @@ mkdir lib public routers views
                 <p class="pad">
                     En Consola iniciamos Nodemon: <b>npm run dev</b>
                     <br> <br>
-                    Debera correr en Localhost:4000 dando un error (un error positivo, porque vemos que Nodemon esta corriendo pero el error es porque no hemos linqueado nada aun en los archivos).
+                    Debera correr en Localhost:4000 dando un error (un error positivo, porque vemos que Nodemon está corriendo, pero el error es porque no hemos linqueado nada aun en los archivos).
                     <br> <br>
                     Nos vamos a la Carpeta <b>routers</b>, creamos el archivo <b>index.js</b> y dentro:
                 </p>
@@ -311,9 +320,9 @@ mkdir lib public routers views
                 </div>
 
                 <p class="pad">
-                    Tras esto la Consola comenzara a darnos error, porque Autentication y Links de Router, estan vacios. <br> <br>
-
-                    Vamos a la carpeta <b>routers</b> y tanto para <b>autentication.js</b> como para <b>links.js</b> usaremos este mismo codigo:
+                    Tras esto la Consola comenzará a darnos error, porque Autentication y Links de Router, están vacíos.
+                    <br><br>
+                    Vamos a la carpeta <b>routers</b> y tanto para <b>autentication.js</b> como para <b>links.js</b> usaremos este mismo código:
                 </p>
 
                 <div class="border">
@@ -329,7 +338,7 @@ mkdir lib public routers views
                 </div>
 
                 <p class="pad">
-                    Ya con esto en el navegador podemos ver nuestro "Hola Mundo" y desaparece el nombre "Error" en el nombre de la pestaña de la pagina, indicando ahora "localhost:4000". <br> <br>
+                    Ya con esto en el navegador podemos ver nuestro "Hola Mundo" y desaparece el nombre "Error" en el nombre de la pestaña de la página, indicando ahora "localhost:4000". <br> <br>
                     Creamos la carpeta <b>database</b> en la carpeta del proyecto (fuera de <b>src</b>) y dentro creamos el archivo <b>db.sql</b>:
                 </p>
 
